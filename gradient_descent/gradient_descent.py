@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def optimize(xk, eps):
+def optimize(xk, fuel):
     history = [(xk, gradf_xk := gradf(xk))]
-    while abs(gradf_xk) > eps:
+    for _ in range(fuel):
         dk = -gradf_xk
         tau = backtracking_line_search(xk, dk, 0.5)
         xk += tau * dk
@@ -39,7 +39,7 @@ def render_function(start, end):
 
 
 if __name__ == '__main__':
-    history = optimize(3.0, 0.00001)
+    history = optimize(3.0, 1000)
     for line in history:
         print(line)
     # render_function(-10, 5)
